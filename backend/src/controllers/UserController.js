@@ -35,10 +35,16 @@ module.exports = class UserController {
     if(role === "Vendedor"){
       role === 0
     }
+    if (req.file){
+      image = `${req.file.filename}`
+    }
     const user = new User({
-      name,email,role,name,idade,email,password: passwordHash
+      name,email,role,name,idade,email,password: passwordHash,image
     })
+    
     try {
+      const imageURL = `${req.protocol}://${req.get('host')}/uploads/${image}`;
+      user.image = imageURL
       await user.save()
       res.status(201).json({message: "Usuario criado com sucesso",user})
     } catch (error) {
