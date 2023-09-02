@@ -4,10 +4,6 @@ const bcrypt = require('bcrypt')
 module.exports = class UserController {
   static async RegisterUser(req,res){
     const {role,name,idade,email,password,confirmPassword } = req.body;
-    let image = ""
-    if (req.file){
-      image = req.file.filename
-    }
     if(!name){
       return res.status(422).json({message: "O nome é obrigatório"})
     }
@@ -35,15 +31,20 @@ module.exports = class UserController {
     if(role === "Vendedor"){
       role === 0
     }
-    if (req.file){
+   
+    let image = ""
+    if(req.file){
+      
       image = `${req.file.filename}`
     }
+    console.log(req.file.filename)
     const user = new User({
       name,email,role,name,idade,email,password: passwordHash,image
     })
     
     try {
-      const imageURL = `${req.protocol}://${req.get('host')}/uploads/${image}`;
+      const imageURL = `${req.protocol}://${req.get('host')}/src/uploads/${image}`;
+      console.log(imageURL)
       user.image = imageURL
       await user.save()
       res.status(201).json({message: "Usuario criado com sucesso",user})

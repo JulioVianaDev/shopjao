@@ -11,8 +11,8 @@ function RegisterForm({changeState}) {
         <input type="text" id="password" name="password" />
         <label htmlFor="confirmPassword">Confirme sua senha</label>
         <input type="text" id="confirmPassword" name="confirmPassword" />
-
-        <div className="" onClick={changeState}>criar conta</div>
+        <button type="submit">Criar conta</button>
+        <div className="" onClick={changeState}>Login</div>
       </form>
   )
 }
