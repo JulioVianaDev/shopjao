@@ -43,7 +43,7 @@ module.exports = class UserController {
     })
     
     try {
-      const imageURL = `${req.protocol}://${req.get('host')}/src/uploads/${image}`;
+      const imageURL = `${req.protocol}://${req.get('host')}/uploads/${image}`;
       console.log(imageURL)
       user.image = imageURL
       await user.save()
